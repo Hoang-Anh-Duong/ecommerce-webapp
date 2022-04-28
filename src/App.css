@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -35,4 +35,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.scale1_5 {
+  transform: scale(1.3);
+  margin-left: 5px;
+}
+
+.margin-product {
+  margin-right: 5%;
+}
+.checkbox-none-background .ant-checkbox-inner {
+  background: #00000000;
+}
+
+.blue-border {
+  border: 1px solid #00214080;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+
+.wrap-text {
+  display: block;
+  display: -webkit-box;
+  line-height: 1.3;
+  -webkit-line-clamp: 1;  /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top:10px;
 }
