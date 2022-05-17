@@ -27,16 +27,22 @@ const ListCustomer = () => {
             render: text => <div>{text}</div>,
         },
         {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            render: text => <div>{text}</div>,
-        },
-        {
             title: 'User name',
             dataIndex: 'username',
             key: 'username',
             render: text => <div>{text}</div>,
+        },
+        {
+            title: 'Total orders',
+            dataIndex: 'total_order',
+            key: 'total_order',
+            render: text => <div>{text || 0}</div>,
+        },
+        {
+            title: 'Total price',
+            dataIndex: 'total_price',
+            key: 'total_price',
+            render: text => <div>{text || 0}</div>,
         },
         {
             title: 'Email',
@@ -54,12 +60,12 @@ const ListCustomer = () => {
                     <MinusCircleTwoTone twoToneColor="#ff2121" />}
             </div>,
         },
-        {
-            title: 'Create date',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-            render: text => <div>{text ? text : '-'}</div>,
-        },
+        // {
+        //     title: 'Create date',
+        //     dataIndex: 'createdAt',
+        //     key: 'createdAt',
+        //     render: text => <div>{text ? text : '-'}</div>,
+        // },
         {
             title: 'Action',
             key: 'action',

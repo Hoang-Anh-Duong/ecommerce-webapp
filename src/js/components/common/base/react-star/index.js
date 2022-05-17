@@ -2,9 +2,9 @@ import { useState } from "react";
 import { StyleStar } from "./styled";
 
 
-const StarRating = ({ star }) => {
+const StarRating = ({ star, className = '' }) => {
     return (
-        <StyleStar className="star-rating">
+        <StyleStar className={`star-rating ${className}`}>
             {[...Array(5)].map((starItem, index) => {
                 index += 1;
                 return (

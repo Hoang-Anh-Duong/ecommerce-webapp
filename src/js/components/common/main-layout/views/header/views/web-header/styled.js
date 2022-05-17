@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyleWebHeaderComponent = styled.div`
-font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
 .header {
     display: block;
     width: 100%;
@@ -21,7 +20,6 @@ font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
             margin-top: 3px;
             margin-bottom : 3px;
         }
-
     }
 
     .header-mid {
@@ -102,11 +100,21 @@ font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
             padding: 10px;
             font-size: 25px;
             color: black;
+            position: relative;
+
+            .number {
+                position: absolute;
+                top: 5%;
+                right: 2%;
+                background-color: orange;
+                border-radius: 50%;
+                width: 15px;
+                font-size: 10px;
+                text-align: center;
+            }
         }
     }
 }
-
-
 `;
 
 export default StyleWebHeaderComponent;

@@ -32,6 +32,7 @@ const MenuComponent = () => {
                         <div className="menu-item" onClick={() => { history.push("/cart") }}>Giỏ hàng</div>
                         <div className="menu-item" onClick={() => { history.push("/order") }}>Đơn của bạn</div>
                         <div className="menu-item" onClick={() => { history.push("/user-information") }}>Thông tin tài khoản</div>
+                        <div className="menu-item" onClick={() => { history.push("/change-password") }}>Đổi mật khẩu</div>
                         <div className="menu-item" onClick={logout}>Đăng xuất</div>
                     </> :
                     <>

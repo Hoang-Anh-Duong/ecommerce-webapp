@@ -1,13 +1,27 @@
 import styled from "styled-components";
 
 const StyleListOrderComponent = styled.div`
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: whitesmoke;
+
+    .left-function {
+        font-size: 16px;
+        margin: 10px 0px;
+
+        .left-item {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .order-function {
+            color: #eb491c;
+        }
+    }
 
     .order-header {
         font-size: 46px;
-        margin-top: 15px;
+        padding-top: 15px;
         text-transform: uppercase;
         font-weight: 300;
     }
@@ -63,6 +77,13 @@ const StyleListOrderComponent = styled.div`
                 margin-left: 4px;
             }
         }
+    }
+    
+    .order-empty {
+        font-size: 25px;
+        text-align: center;
+        padding: 30px 0;
+
     }
 `;
 

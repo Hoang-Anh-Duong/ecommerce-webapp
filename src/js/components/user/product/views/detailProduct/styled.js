@@ -1,41 +1,40 @@
 import styled from "styled-components";
 
 const StyleDetailProductComponent = styled.div`
-    position: relative;
-    margin-top: 20px;
-            margin-left: 5%;
-            margin-right: 5%;
-
-    .detail-header {
+    margin-left: 5%;
+    margin-right: 5%;
+    
+    .breadcrumb {
+        z-index: 1;
+        margin-top: 10px;
+        margin-bottom: 10px;
         
-        .breadcrumb {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            margin-left: 10px;
+        .breadcrumb-item {
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin-left: 3px;
             
-            .breadcrumb-item {
-                cursor: pointer;
-                font-size: 16px;
-                letter-spacing: 1px;
-                margin-left: 3px;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .back {
-                margin-left: 5px;
-                margin-right: 10px;
-
-                &:hover {
-                    text-decoration: underline;
-                }
+            &:hover {
+                text-decoration: underline;
             }
         }
         
+        .back {
+            margin-left: 5px;
+            margin-right: 10px;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .detail-header {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+
         .product-name {
             font-size: 36px;
             line-height: 36px;
@@ -43,19 +42,66 @@ const StyleDetailProductComponent = styled.div`
             font-style: normal;
             font-weight: 300;
             position: absolute;
-            top: 30px;
+            top: 0px;
             left: 0;
             z-index: 1;
-            margin-left: 10px;
+            height: 60px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.5);
+            
+        }
+        .product-price {
+            font-size: 16px;
+            line-height: 36px;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: 300;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            z-index: 1;
+            padding: 0 10px;
+            background-color: rgba(255,255,255,0.5);
+
+            .old-price {
+                text-decoration: line-through;
+            }
+
+            .new-price {
+                color: red;
+            }
+        }
+
+        /* .old-price {
+            font-size: 16px;
+            line-height: 36px;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: 300;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            z-index: 1;
+            padding: 0 10px;
+            background-color: rgba(255,255,255,0.5);
+            text-decoration: line-through;
+        } */
+
+        .product-star {
+            padding: 0 10px;
+            background-color: rgba(255,255,255,0.5);
         }
     }
     .detail-container {
         
         .content {
+            position: relative;
             
             .image {
                 width: 100%;
-                max-height: 550px;
+                height: 550px;
                 object-fit: cover;
                 display: block;
                 margin-left: 0;
@@ -65,12 +111,6 @@ const StyleDetailProductComponent = styled.div`
         
         .sidebar-wrapper {
             
-            .product-price {
-                font-size: 16px;
-                position: absolute;
-                top: 65px;
-                margin-left: 10px;
-            }
             
             button {
                 cursor: pointer;
@@ -116,6 +156,7 @@ const StyleDetailProductComponent = styled.div`
                 position: sticky;
                 top: 0;
                 background-color: white;
+                z-index: 5;
                 
                 .nav {
                     width: 50%;
@@ -189,6 +230,7 @@ const StyleDetailProductComponent = styled.div`
                         margin-left: 1.5%;
                         margin-right: 1.5%;
                         margin-bottom: 30px;
+                        font-size: 16px;
                         white-space: pre-wrap;
                     }
                     

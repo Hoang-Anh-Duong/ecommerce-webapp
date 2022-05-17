@@ -7,6 +7,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import numberWithCommas from '../../../../../helpers/formatNumberWithCommas';
 import toastCustom from '../../../../../helpers/toast-custom';
 import productService from '../../../../../services/user/product.service';
+import imageService from '../../../../../services/admin/image.service';
 import cartService from '../../../../../services/user/cart.service';
 import { StyleDetailProductComponent } from './styled';
 import commentService from '../../../../../services/user/comment.service';
@@ -25,6 +26,7 @@ const DetailProductComponent = () => {
     const [avgStar, setAvgStar] = useState(0);
     const [images, setImages] = useState([]);
     const [dataProduct, setDataProduct] = useState({});
+    const [price, setPrice] = useState(0);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const history = useHistory();
     let params = useParams();
@@ -35,7 +37,7 @@ const DetailProductComponent = () => {
     const product = {
         quantity: 1,
         productId: id_product,
-        currentPrice: dataProduct.price
+        currentPrice: price
     };
 
     const showModal = () => {
@@ -101,7 +103,18 @@ const DetailProductComponent = () => {
             id_product,
             (data) => {
                 setDataProduct(data);
-                setImages(data.images);
+                if (data?.promotions.length === 0) {
+                    setPrice(data?.price);
+                } else {
+                    setPrice(data?.promotions[0]?.priceSale);
+                }
+                imageService.getImageByIds(
+                    data?.images,
+                    (images) => {
+                        setImages(images);
+                    },
+                    () => { }
+                )
             },
             () => { }
         );
@@ -137,43 +150,60 @@ const DetailProductComponent = () => {
 
     return (
         <StyleDetailProductComponent>
-            <div className="detail-header">
-                <div className="breadcrumb">
-                    <span
-                        className="breadcrumb-item back"
-                        onClick={() => history.goBack()}
-                    >
-                        <AiOutlineRollback />Trở lại
-                    </span>
-                    <span
-                        className="breadcrumb-item"
-                        onClick={() => { history.push("/") }}
-                    >
-                        Trang chủ
-                    </span>
-                    <span
-                        className="breadcrumb-item"
-                    >
-                        /{dataProduct?.Category?.name}
-                    </span>
-                </div>
-                <div className="product-name">{dataProduct?.name}</div>
-                <StarRating star={avgStar} />
+            <div className="breadcrumb">
+                <span
+                    className="breadcrumb-item back"
+                    onClick={() => history.goBack()}
+                >
+                    <AiOutlineRollback />Trở lại
+                </span>
+                <span
+                    className="breadcrumb-item"
+                    onClick={() => { history.push("/") }}
+                >
+                    Trang chủ
+                </span>
+                <span
+                    className="breadcrumb-item"
+                >
+                    /{dataProduct?.Category?.name}
+                </span>
             </div>
             <div className="detail-container">
                 <div className="content">
+                    <div className="detail-header">
+                        <div className="product-name">
+                            {dataProduct?.name}
+                        </div>
+                        {
+                            dataProduct?.promotions?.length === 0 ?
+                                <div className="product-price">
+                                    {numberWithCommas(dataProduct?.price)}đ
+                                </div> :
+                                <div className="product-price">
+                                    <span className="old-price">
+                                        {numberWithCommas(dataProduct?.price)}đ
+                                    </span>
+                                    {
+                                        dataProduct?.promotions ?
+                                            <span className="new-price">
+                                                {numberWithCommas(dataProduct?.promotions[0]?.priceSale)}đ
+                                            </span> :
+                                            <span></span>
+                                    }
+                                </div>
+                        }
+                        <StarRating className="product-star" star={avgStar} />
+                    </div>
                     <Carousel className="carousel">
                         {images.map((image, key = 0) => (
                             <div key={key++}>
-                                <img className="image" src={image} alt="" />
+                                <img className="image" src={image?.src} alt="" />
                             </div>
                         ))}
                     </Carousel>
                 </div>
                 <div className="sidebar-wrapper">
-                    <div className="product-price">
-                        {numberWithCommas(dataProduct?.price)}đ
-                    </div>
                     {
                         isAuthenticate ?
                             <div>

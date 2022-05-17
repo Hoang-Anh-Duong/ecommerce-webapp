@@ -28,9 +28,11 @@ const StyleListProductComponent = styled.div`
 
         .filter {
             height: 30px;
-            width: 20%;
+            width: 15%;
             border-radius: 0px;
             margin-right: 10px;
+            outline: none;
+            box-shadow: none;
         }
     }
 

@@ -38,8 +38,8 @@ const BestOfAdidasComponent = ({ dataProducts }) => {
             <Carousel className="carousel" responsive={responsive}>
 
                 {dataProducts.map(dataProduct => (
-                    <div key={dataProduct.id} className="margin-product">
-                        <ProductComponent dataProduct={dataProduct} />
+                    <div key={dataProduct.productId} className="margin-product">
+                        <ProductComponent dataProduct={dataProduct.Product} />
                     </div>
                 ))}
 

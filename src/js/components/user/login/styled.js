@@ -103,6 +103,14 @@ const StyleLoginComponent = styled.div`
             color: gray;
         }
     }
+
+    .forget-password {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 `;
 export { StyleLoginComponent };

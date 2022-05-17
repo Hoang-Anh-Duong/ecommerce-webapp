@@ -23,10 +23,13 @@ const StyleBannerComponent = styled.div`
 
         .body {
             font-size: 18px;
+            margin: 10px 0px;
         }
 
         .register {
             cursor: pointer;
+            display: flex;
+            align-items: center;
             border: 0px;
             background-color: black;
             color: white;

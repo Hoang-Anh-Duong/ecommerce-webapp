@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyleFooterComponent = styled.div`
 border-top: 1px solid lightgray;
-margin-top: 2rem;
+/* margin-top: 2rem; */
 background-color: lightgray;
 
     /* .receive-info {

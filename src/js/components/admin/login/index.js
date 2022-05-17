@@ -1,30 +1,45 @@
-import { Form, Input, Button } from 'antd';
-import React, { useState } from 'react';
-import adminAuth from '../../../services/admin/auth.service';
-import storage from '../../../helpers/storage';
+import { Button, Form, Input } from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import Auth from '../../../helpers/auth';
+import storage from '../../../helpers/storage';
+import adminAuth from '../../../services/admin/auth.service';
+import ForgotPasswordModal from '../modal/forgot-password'
 
 const LoginComponent = () => {
     const [form] = Form.useForm();
+    const ref = useRef();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [errorLogin, setErrorLogin] = useState(null);
     const [loading, setLoading] = useState(false);
     const { state } = useLocation();
 
-    const onFinish = async (value) => {
+    useEffect(() => {
+        storage.clearToken();
+    }, [])
+
+    const onFinish = (value) => {
         setLoading(false);
         if (!loading) {
-            await adminAuth.authorizeAdmin(value, (res) => {
-                storage.setAdminToken(res.token);
-                Auth.authenticated(() => {
-                    setIsAuthenticated(true);
-                })
-            }).finally(() => setLoading(true));
+            adminAuth.authorizeAdmin(value,
+                (res) => {
+                    storage.setAdminToken(res.token);
+                    Auth.authenticated(() => {
+                        setIsAuthenticated(true);
+                    })
+                    setLoading(true);
+                },
+                (err) => {
+                    setLoading(false);
+                    console.log(err)
+                    setErrorLogin(err);
+                }
+            );
         }
     };
 
     if (isAuthenticated === true) {
-        return (<Redirect to={state?.from} />)
+        return (<Redirect to={state?.from || '/admin/category-manager'} />)
     }
 
     return (
@@ -46,10 +61,12 @@ const LoginComponent = () => {
                 <div style={{ textAlign: 'center' }}>
                     <h2>Admin login</h2>
                 </div>
+                {errorLogin && <div style={{ textAlign: 'center', color: 'red', fontStyle: 'inherit' }}>{errorLogin}</div>}
                 <Form
                     layout='vertical'
                     form={form}
                     onFinish={onFinish}
+                    autoComplete="off"
                 >
                     <Form.Item
                         label="User name"
@@ -74,14 +91,19 @@ const LoginComponent = () => {
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" />
+                        <Input.Password placeholder="input placeholder" />
                     </Form.Item>
 
-                    <Form.Item>
+                    <Form.Item style={{ textAlign: 'end' }}>
+                        <a onClick={() => { console.log("duong"); ref.current.showModal() }}>Forgot password?</a>
+                    </Form.Item>
+
+                    <Form.Item style={{ textAlign: 'end' }}>
                         <Button type="primary" htmlType="submit" loading={loading}>Submit</Button>
                     </Form.Item>
                 </Form>
             </div>
+            <ForgotPasswordModal ref={ref} />
         </div>
     );
 };

@@ -4,6 +4,7 @@ const StyleCartComponent = styled.div`
     font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 10px;
 
     .cart-header {
         font-size: 46px;
@@ -57,6 +58,11 @@ const StyleCartComponent = styled.div`
         .cart-sum {
             font-weight: bold;
         }
+
+        .warning {
+            font-size: 16px;
+            margin-top: 10px;
+        }
     }
 
     .cart-infor {
@@ -68,9 +74,34 @@ const StyleCartComponent = styled.div`
         .cart-detail {
             margin-top: 10px;
             border: 1px solid lightgray;
-            max-height: 200px;
+            max-height: 160px;
             padding-left: 2%;
             padding-right: 2%;
+            line-height: 30px;
+
+            .detail-title {
+                margin-top: 10px;
+                text-transform: uppercase;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .detail-body {
+                
+                .body-title {
+                    text-transform: uppercase;
+                    font-size: 14px;
+                }
+
+                .body-content {
+                    float: right;
+                    font-size: 14px;
+                }
+            }
+
+            .summary {
+                font-weight: bold;
+            }
         }
     }
 
@@ -90,6 +121,26 @@ const StyleCartComponent = styled.div`
 
             &:hover {
                 color: gray;
+            }
+        }
+
+        .warning {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    }
+
+    .cart-empty {
+        font-size: 20px;
+
+        .shop {
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-bottom: 1px solid black;
+
+            &:hover {
+                color: #07aee0;
             }
         }
     }

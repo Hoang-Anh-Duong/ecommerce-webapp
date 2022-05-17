@@ -3,7 +3,9 @@ import styled from "styled-components";
 const StyleOrderProductItemComponent = styled.div`
 
     .cart-item {
-        border: 1px black solid;
+        /* border: 1px black solid; */
+        background-color: #f0f0f5;
+        border-radius: 3px;
         margin-top: 10px;
         margin-bottom: 15px;
         position: relative;
@@ -13,7 +15,7 @@ const StyleOrderProductItemComponent = styled.div`
 
             .image {
                 width: 100%;
-                height: auto;
+                height: 100px;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
@@ -35,19 +37,10 @@ const StyleOrderProductItemComponent = styled.div`
 
                 .item-price {
                     font-size: 16px;
-                    float: right;
                 }
             }
 
             .item-quantity {
-
-                .quantityInput {
-                    width: 30px;
-                }
-
-                .changeQuantityBtn {
-                   width: 30px;
-                }
             }
         }
 

@@ -16,7 +16,7 @@ const BannerComponent = ({ dataBanner }) => {
                         {dataBanner.info}
                     </div>
                     <Link to="/">
-                        <button className="register">Đăng kí ngay <AiOutlineArrowRight /></button>
+                        <button className="register">Đăng kí ngay <AiOutlineArrowRight className="scale1_5" /></button>
                     </Link>
                 </div>
             </div>

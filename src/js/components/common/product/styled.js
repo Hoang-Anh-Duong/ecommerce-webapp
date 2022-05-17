@@ -1,21 +1,41 @@
 import styled from "styled-components";
 
 const StyleProductComponent = styled.div`
-    .new-arrival-item {
-        /* margin-right: 5%; */
+    .item {
         cursor: pointer;
         border: 1px solid transparent;
+
         .product {
 
             .product-image {
                 width: 100%;
-                height: auto;
+                height: 300px;
                 margin-bottom: 2%;
+                object-fit: cover;
             }
 
-            .price {
-                color: black;
-                /* margin-top: -40px; */
+            .product-price {
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-top: -25px;
+                margin-bottom: 10px;
+
+                .price {
+                    color: black;
+                    background-color: rgba(255,255,255,1);
+                }
+
+                .old-price {
+                    color: black;
+                    background-color: rgba(255,255,255,1);
+                    text-decoration: line-through;
+                    padding-right: 5px;
+                }
+
+                .promotion-price {
+                    color: #e32b2b;
+                    background-color: rgba(255,255,255,1);
+                }
             }
 
             .wishlist {
@@ -24,14 +44,14 @@ const StyleProductComponent = styled.div`
             }
 
             .detail {
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 5px;
+                padding-right: 5px;
 
                 .product-name {
                     color: black;
                     font-size: 16px;
                     line-height: 20px;
-                    text-transform: capitalize;
+                    text-transform: uppercase;
                 }
 
                 .product-category {

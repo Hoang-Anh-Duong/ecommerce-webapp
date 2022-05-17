@@ -98,6 +98,12 @@ const LoginComponent = () => {
                                     {/* <span className="behind-button"></span> */}
                                 </div>
                             </form>
+                            <div
+                                className="forget-password"
+                                onClick={() => history.push("/forget-password")}
+                            >
+                                Quên mật khẩu?
+                            </div>
                         </div>
                     </Col>
                     <Col span={12} xs={24} xl={12}>

@@ -7,7 +7,23 @@ const getNewestProduct = async (
 ) => {
     try {
         const listNewestProductPath = `/customer/product/newest`;
-        const res = await axiosHelper.sendGet(listNewestProductPath, params);
+        const res = await axiosHelper.sendGet(listNewestProductPath);
+        if (res?.code === 200) {
+            onSuccess(res?.data);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getMostStarProduct = async (
+    params,
+    onSuccess = () => { },
+    onError = () => { }
+) => {
+    try {
+        const listMostStarProductPath = `/customer/product/moststar`;
+        const res = await axiosHelper.sendGet(listMostStarProductPath);
         if (res?.code === 200) {
             onSuccess(res?.data);
         }
@@ -69,6 +85,7 @@ const productService = {
     getListProducts,
     getProductById,
     search,
+    getMostStarProduct,
 };
 
 export default productService;

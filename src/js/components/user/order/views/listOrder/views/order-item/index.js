@@ -2,11 +2,19 @@ import { Modal } from 'antd';
 import React, { useState } from 'react';
 import numberWithCommas from '../../../../../../../helpers/formatNumberWithCommas';
 import { StyleOrderItemComponent } from './styled';
+import OrderModalComponent from './views/order-modal';
 import OrderProductItemComponent from './views/order-product-item';
 
 const OrderItemComponent = ({ order }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+    const status = [
+        "Đang chờ duyệt",
+        "Đã duyệt",
+        "Đang giao hàng",
+        "Giao hàng thành công",
+        "Hủy đơn hàng"
+    ]
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -28,53 +36,58 @@ const OrderItemComponent = ({ order }) => {
         return newdate;
     }
     return (
-        <StyleOrderItemComponent>
-            <div>
-                <span>
-                    {order?.productOrder?.length} sản phẩm:
-                </span>
-                <span>
-                    {numberWithCommas(order?.priceTotal)}đ
-                </span>
-            </div>
-            <div>
-                <span>
-                    Ngày đặt hàng:
-                </span>
-                <span>
-                    {convertDateTime(order?.createdAt)}
-                </span>
-            </div>
-            <div>
-                <span>
-                    Trạng thái đơn hàng:
-                </span>
-                <span>
-                    {order?.status}
-                </span>
-            </div>
-            <div>
-                {/* <span>
-                    <button>Xác nhận</button>
-                </span>
-                <span>
-                    <button>Trả hàng</button>
-                </span> */}
-                <span>
-                    <button onClick={showModal}>Xem chi tiết</button>
-                </span>
-            </div>
+        <>
+            <StyleOrderItemComponent>
+                <div className="order-item">
+                    <div className="order-element">
+                        <div className="info">
+                            <div className="title">
+                                {order?.productOrder?.length} sản phẩm
+                            </div>
+                            <div className="body">
+                                : {numberWithCommas(order?.priceTotal)}đ
+                            </div>
+                        </div>
+                        <div className="info">
+                            <div className="title">
+                                Ngày đặt hàng
+                            </div>
+                            <div className="body">
+                                : {convertDateTime(order?.createdAt)}
+                            </div>
+                        </div>
+                        <div className="info">
+                            <div className="title">
+                                Trạng thái
+                            </div>
+                            <div className="body">
+                                : {status[order?.status]}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="order-function">
+                        {order?.status === 0 ?
+                            <div className="order-button">
+                                <button>Trả hàng</button>
+                            </div> :
+                            <div></div>
+                        }
+                        <div className="order-button">
+                            <button onClick={showModal}>Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+            </StyleOrderItemComponent>
             <Modal title="Chi tiết đơn hàng"
                 visible={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 width={500}
+                footer={[]}
             >
-                {order.productOrder.map(product => (
-                    <OrderProductItemComponent key={product?.id} product={product} />
-                ))}
+                <OrderModalComponent productOrder={order} />
             </Modal>
-        </StyleOrderItemComponent>
+        </>
     );
 };
 

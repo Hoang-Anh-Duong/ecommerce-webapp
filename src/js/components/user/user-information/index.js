@@ -1,27 +1,29 @@
 import { Col, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight, AiOutlineCheck } from "react-icons/ai";
 import Validator from "hero-validate";
-import userRegister from '../../../services/user/register.service';
 import { useHistory } from 'react-router-dom';
 import toastCustom from '../../../helpers/toast-custom';
 import { StyleUserInfomationComponent } from './styled';
+import userInformationService from '../../../services/user/user-information.service';
 
 const UserInformationComponent = () => {
     const [dataInfo, setDataInfo] = useState({
-        name: "",
+        fullname: "",
         phone: "",
         address: "",
+        username: "nguyenasl",
+        email: "nguyenthu@gmail.com"
     });
     const [touch, setTouch] = useState({
-        name: false,
+        fullname: false,
         phone: false,
         address: false,
     })
     const history = useHistory();
 
     const rules = {
-        name: "required|min:0",
+        fullname: "required|min:0",
         phone: {
             required: true,
             mycustom: function () {
@@ -39,15 +41,17 @@ const UserInformationComponent = () => {
     }
 
     Validator.setMessages({
-        name: {
+        fullname: {
             required: "Không được để trống",
+            min: "tên không hợp lệ"
         },
         phone: {
             required: "Bạn chưa nhập số điện thoại",
-            mycustom: "not be the same password"
+            mycustom: ""
         },
         address: {
             required: "Không được để trống",
+            min: "tên không hợp lệ"
         },
 
     });
@@ -65,9 +69,40 @@ const UserInformationComponent = () => {
     }
     const handleClickBtnSubmit = (e) => {
         e.preventDefault();
-        console.log(dataInfo);
-        console.log(result)
+        if (!result.hasError) {
+            console.log(dataInfo)
+            userInformationService.updateUserInformation(
+                dataInfo,
+                (data) => {
+                    toastCustom({
+                        mess: "Cập nhật thành công",
+                        type: "success",
+                    });
+                    history.push("/");
+                },
+                () => { }
+            )
+        }
     }
+    const getUserInformation = () => {
+        userInformationService.getUserInformation(
+            "",
+            (data) => {
+                setDataInfo({
+                    fullname: data.fullname,
+                    phone: data.phone,
+                    address: data.address,
+                    username: data.username,
+                    email: data.email
+                });
+            },
+            () => { }
+        )
+    }
+
+    useEffect(() => {
+        getUserInformation();
+    }, [])
     return (
         <StyleUserInfomationComponent>
             <div className="register-container">
@@ -80,14 +115,15 @@ const UserInformationComponent = () => {
                                     <label className="input-name">Họ và tên</label>
                                     <input
                                         type="text"
-                                        name="name"
+                                        name="fullname"
                                         onChange={handleChangeInput}
                                         placeholder="Nhập họ tên..."
+                                        value={dataInfo.fullname}
                                         required
                                     />
                                 </div>
                                 <div className="invalid-feedback">
-                                    {(touch.name && result.errors?.name) && result.errors?.name}
+                                    {(touch.fullname && result.errors?.fullname)}
                                 </div>
                                 <div className="input-container">
                                     <label className="input-name">Số điện thoại</label>
@@ -96,6 +132,7 @@ const UserInformationComponent = () => {
                                         name="phone"
                                         onChange={handleChangeInput}
                                         placeholder="Nhập số điện thoại..."
+                                        value={dataInfo.phone}
                                         required
                                     />
                                 </div>
@@ -109,6 +146,7 @@ const UserInformationComponent = () => {
                                         name="address"
                                         onChange={handleChangeInput}
                                         placeholder="Nhập địa chỉ..."
+                                        value={dataInfo.address}
                                         required
                                     />
                                 </div>
