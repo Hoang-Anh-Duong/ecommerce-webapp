@@ -57,7 +57,7 @@ const getImageByIds = async (
     onError = () => { }
 ) => {
     try {
-        const GET_IMAGE_BY_IDS_PATH = `/admin/image`
+        const GET_IMAGE_BY_IDS_PATH = `/admin/image`;
         const res = await axiosHelper.sendPost(GET_IMAGE_BY_IDS_PATH, params);
         if (res?.code === 200) {
             onSucces(res?.data);

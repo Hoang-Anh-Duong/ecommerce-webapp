@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Table, Form, Button, Input, Divider, Space, InputNumber, Popconfirm } from 'antd';
-import tagService from "../../../services/admin/tag.service";
-import UploadImageModal from "../../../components/admin/modal/upload-image-modal";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
-import EditCategoryModal from "../../../components/admin/modal/edit-category-modal";
+import { Button, Col, Divider, Form, Input, InputNumber, Popconfirm, Row, Space, Table, Spin } from 'antd';
 import TextArea from "antd/lib/input/TextArea";
+import React, { useEffect, useRef, useState } from "react";
 import ListImage from "../../../components/admin/list-image";
+import EditCategoryModal from "../../../components/admin/modal/edit-category-modal";
+import UploadImageModal from "../../../components/admin/modal/upload-image-modal";
+import tagService from "../../../services/admin/tag.service";
 
 const TagManager = () => {
     const [dataSource, setDataSource] = useState([]);
@@ -14,8 +14,8 @@ const TagManager = () => {
     const [formSearch] = Form.useForm();
     const perPage = 10;
     const [count, setCount] = useState(1);
-    const childRef = useRef();
     const editModalRef = useRef();
+    const [isLoading, setIsLoading] = useState(false);
     const columns = [
         {
             title: 'Stt',
@@ -94,16 +94,21 @@ const TagManager = () => {
             minTotal: formSearch.getFieldValue('minTotal'),
             maxTotal: formSearch.getFieldValue('maxTotal'),
         }
-        tagService.searchCategory(search, (res) => {
-            const categorys = res.rows;
-            setCount(res.count);
-            let data = categorys.map((item, index) => ({
-                key: index + 1,
-                stt: index + 1,
-                ...item
-            }))
-            setDataSource(data);
-        });
+        setIsLoading(true);
+        tagService.searchCategory(search,
+            (res) => {
+                const categorys = res.rows;
+                setCount(res.count);
+                let data = categorys.map((item, index) => ({
+                    key: index + 1,
+                    stt: index + 1,
+                    ...item
+                }))
+                setDataSource(data);
+                setIsLoading(false);
+            },
+            () => setIsLoading(false)
+        );
     }
 
     const deleteCategory = (id) => {
@@ -194,7 +199,7 @@ const TagManager = () => {
                         </Row>
                     </Form>
                     <div className='blue-border' style={{ marginBottom: 10 }}>
-                        <Table dataSource={dataSource} columns={columns} pagination={pagination}></Table>
+                        <Table dataSource={dataSource} columns={columns} pagination={pagination} loading={isLoading}></Table>
                     </div>
                 </Col>
                 <Col span={9} style={{ paddingLeft: 5 }}>

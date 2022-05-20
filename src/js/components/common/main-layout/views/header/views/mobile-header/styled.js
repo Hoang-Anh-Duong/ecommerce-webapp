@@ -24,6 +24,17 @@ const StyleMobileHeaderComponent = styled.div`
         .cart {
             font-size: 25px;
             color: black;
+
+            .number {
+                position: absolute;
+                top: 5%;
+                right: 2%;
+                background-color: orange;
+                border-radius: 50%;
+                width: 15px;
+                font-size: 10px;
+                text-align: center;
+            }
         }
 `;
 

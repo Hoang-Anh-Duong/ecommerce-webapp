@@ -4,6 +4,7 @@ const StyleRegisterComponent = styled.div`
 .register-container {
     padding-left: 5%;
     padding-right: 5%;
+    padding-bottom: 20px;
 
     .form-register {
         padding-top: 2rem;

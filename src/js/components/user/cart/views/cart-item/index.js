@@ -20,7 +20,9 @@ const CartItemComponent = ({ dataProduct,
     const id_product = dataProduct.productId;
 
     const increaseQuantity = () => {
-        setQuantity(quantity + 1);
+        if (inforProduct?.total > quantity) {
+            setQuantity(quantity + 1);
+        }
     }
     const decreaseQuantity = () => {
         if (quantity > 1) {
@@ -99,7 +101,9 @@ const CartItemComponent = ({ dataProduct,
                         {
                             inforProduct?.total == 0 ?
                                 <div className="item-infor item-status">Sản phẩm tạm hết hàng</div> :
-                                <div className="item-infor item-status">Sản phẩm đang sẵn hàng</div>
+                                quantity === inforProduct?.total ?
+                                    <div className="item-infor item-status">Sản phẩm đã đạt số lượng tối đa</div> :
+                                    <div className="item-infor item-status">Sản phẩm đang sẵn hàng</div>
                         }
                     </Col>
                     <Col span={2} className="item-function">

@@ -68,10 +68,10 @@ const DetailProductComponent = () => {
             () => {
                 getDataCommentById();
                 setNewComment("");
-                toastCustom({
-                    mess: "thành công",
-                    type: "success",
-                });
+                // toastCustom({
+                //     mess: "Thành công",
+                //     type: "success",
+                // });
             },
             () => { }
         )
@@ -165,6 +165,7 @@ const DetailProductComponent = () => {
                 </span>
                 <span
                     className="breadcrumb-item"
+                    onClick={() => { history.push(`/product?category=${dataProduct?.categoryId}`) }}
                 >
                     /{dataProduct?.Category?.name}
                 </span>
@@ -282,14 +283,17 @@ const DetailProductComponent = () => {
                             {dataComment.map((comment, key = 0) => (
                                 <div key={key++}>
                                     <div>
-                                        <ReactStars classNames="number-star"
-                                            count={5}
-                                            size={24}
-                                            isHalf={true}
-                                            value={parseInt(comment.star)}
-                                            activeColor="black"
-                                            edit={false}
-                                        />
+                                        <span className="user-name">{comment?.User?.fullname}</span>
+                                        <span className="number-star">
+                                            <ReactStars classNames="number-star"
+                                                count={5}
+                                                size={24}
+                                                isHalf={true}
+                                                value={parseInt(comment.star)}
+                                                activeColor="black"
+                                                edit={false}
+                                            />
+                                        </span>
                                     </div>
                                     <div className="user-comment">
                                         {comment.content}
@@ -326,7 +330,7 @@ const DetailProductComponent = () => {
             >
                 <ModalRedirectComponent />
             </Modal>
-        </StyleDetailProductComponent>
+        </StyleDetailProductComponent >
     );
 };
 

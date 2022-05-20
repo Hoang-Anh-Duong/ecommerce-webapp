@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const StyleLoginComponent = styled.div`
 .register-container {
-    font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
     padding-left: 5%;
     padding-right: 5%;
+    padding-bottom: 20px;
 
     .form-register {
         padding-top: 2rem;

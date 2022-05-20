@@ -202,7 +202,7 @@ const CartComponent = () => {
                             }
                         </Col>
                         <Col xs={0} xl={1}></Col>
-                        <Col xs={24} xl={7} className="cart-detail">
+                        {/* <Col xs={24} xl={7} className="cart-detail">
                             <h1 className="detail-title">Tóm tắt đơn hàng</h1>
                             <div className="detail-body">
                                 <span className="body-title">{listProductSelected.length} sản phẩm</span>
@@ -216,7 +216,26 @@ const CartComponent = () => {
                                 <span className="body-title">Tổng (Đã bao gồm thuế)</span>
                                 <span className="body-content">{numberWithCommas(totalPrice)}đ</span>
                             </div>
-                        </Col>
+                        </Col> */}
+                        {
+                            dataCartProduct.length !== 0 ?
+                                <Col xs={24} xl={7} className="cart-detail">
+                                    <h1 className="detail-title">Tóm tắt đơn hàng</h1>
+                                    <div className="detail-body">
+                                        <span className="body-title">{listProductSelected.length} sản phẩm</span>
+                                        <span className="body-content">{numberWithCommas(totalPrice)}đ</span>
+                                    </div>
+                                    <div className="detail-body">
+                                        <span className="body-title">Giao hàng</span>
+                                        <span className="body-content">Miễn phí</span>
+                                    </div>
+                                    <div className="detail-body summary">
+                                        <span className="body-title">Tổng (Đã bao gồm thuế)</span>
+                                        <span className="body-content">{numberWithCommas(totalPrice)}đ</span>
+                                    </div>
+                                </Col> :
+                                <div></div>
+                        }
                     </Row> :
                     <div></div>
             }

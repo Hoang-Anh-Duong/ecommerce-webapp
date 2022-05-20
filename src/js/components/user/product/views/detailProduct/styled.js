@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyleDetailProductComponent = styled.div`
     margin-left: 5%;
     margin-right: 5%;
+    padding-bottom: 20px;
     
     .breadcrumb {
         z-index: 1;

@@ -50,7 +50,8 @@ const FormCategoryProduct = (props) => {
                 setCount(res.count);
                 setListCategory(res.rows);
                 setIsLoadingCategory(false);
-            }
+            },
+            () => setIsLoadingCategory(false),
         );
     }
 

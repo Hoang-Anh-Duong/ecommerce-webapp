@@ -59,13 +59,12 @@ const OrderProductItemComponent = ({ product }) => {
                                         </span>
                                         <span className="item-price">
                                             {numberWithCommas(product?.currentPrice)}đ
-                                            {console.log(product?.currentPrice, " ", inforProduct?.price)}
                                         </span>
                                     </div>
                             }
                         </div>
                         <div className="item-infor item-quantity">
-                            <div>x{product.quantity}</div>
+                            <div>x{product?.quantity}</div>
                         </div>
                     </Col>
                 </Row>

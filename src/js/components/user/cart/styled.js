@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 const StyleCartComponent = styled.div`
-    font-family: "Noto Sans","AdihausDIN","Helvetica",Arial,sans-serif !important;
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     .cart-header {
         font-size: 46px;

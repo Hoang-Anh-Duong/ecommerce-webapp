@@ -55,7 +55,8 @@ const StyleCartItemComponent = styled.div`
             }
 
             .item-quantity {
-
+                display: inline;
+                
                 .quantityInput {
                     width: 50px;
                     text-align: center;
@@ -70,6 +71,10 @@ const StyleCartItemComponent = styled.div`
                     &:focus {
                         /* border: gray; */
                     }
+                }
+
+                .max-quantity {
+                    display: inline;
                 }
             }
 

@@ -57,7 +57,7 @@ const ForgetPasswordComponent = () => {
                             mess: "Đổi mật khẩu thành công",
                             type: "success"
                         });
-                        history.push("/change-password");
+                        history.push("/login");
                     } else {
                         toastCustom({
                             mess: "Kiểm tra lại tài khoàn và mật khẩu",

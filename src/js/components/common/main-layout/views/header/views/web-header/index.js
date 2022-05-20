@@ -14,6 +14,7 @@ const WebHeaderComponent = () => {
     const history = useHistory();
     const token = storage.getToken();
 
+    let interval;
     const { Search } = Input;
     const accountFeature = (
         <Menu>
@@ -64,12 +65,15 @@ const WebHeaderComponent = () => {
     }, [token])
     useEffect(() => {
         if (storage.getToken()) {
-            const interval = setInterval(getCartNumber(), 1000);
-            return () => clearInterval(interval);
+            if (interval) {
+                clearInterval(interval);
+            }
+            interval = setInterval(getCartNumber, 1000);
         } else {
             setCartNumber(0);
         }
-    }, [])
+        return () => clearInterval(interval);
+    }, [storage.getToken()])
 
     return (
         <StyleWebHeaderComponent>
@@ -85,7 +89,11 @@ const WebHeaderComponent = () => {
                             <Link to="/"><span className="text-color">Trợ giúp</span></Link>
                         </span>
                         <span className="mid-label">
-                            <Link to="/order"><span className="text-color">Theo dõi đơn hàng</span></Link>
+                            {
+                                storage.getToken() ?
+                                    <Link to="/order"><span className="text-color">Theo dõi đơn hàng</span></Link> :
+                                    <Link to="/login"><span className="text-color">Theo dõi đơn hàng</span></Link>
+                            }
                         </span>
                         <span className="mid-label">
                             <Link to="/"><span className="text-color">Đăng ký nhận tin</span></Link>
@@ -150,13 +158,24 @@ const WebHeaderComponent = () => {
                             <span className="wish-list"><AiOutlineHeart /></span>
                         </Col>
                         <Col span={1}>
-                            <span
-                                className="cart"
-                                onClick={() => { history.push("/cart") }}
-                            >
-                                <HiOutlineShoppingBag />
-                                <span className="number">{cartNumber}</span>
-                            </span>
+                            {
+                                storage.getToken() ?
+                                    <span
+                                        className="cart"
+                                        onClick={() => { history.push("/cart") }}
+                                    >
+                                        <HiOutlineShoppingBag />
+                                        <span className="number">{cartNumber}</span>
+                                    </span> :
+                                    <span
+                                        className="cart"
+                                        onClick={() => { history.push("/login") }}
+                                    >
+                                        <HiOutlineShoppingBag />
+                                        <span className="number">{cartNumber}</span>
+                                    </span>
+
+                            }
                         </Col>
                     </Row>
 

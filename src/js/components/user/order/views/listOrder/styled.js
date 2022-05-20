@@ -4,6 +4,7 @@ const StyleListOrderComponent = styled.div`
     padding-left: 5%;
     padding-right: 5%;
     background-color: whitesmoke;
+    padding-bottom: 20px;
 
     .left-function {
         font-size: 16px;
@@ -19,11 +20,27 @@ const StyleListOrderComponent = styled.div`
         }
     }
 
-    .order-header {
-        font-size: 46px;
-        padding-top: 15px;
-        text-transform: uppercase;
-        font-weight: 300;
+    .header-bar {
+        .order-header {
+            font-size: 46px;
+            padding-top: 15px;
+            text-transform: uppercase;
+            display: inline-block;
+            font-weight: 300;
+        }
+    
+        .order-status {
+            display: inline-block;
+            float: right;
+    
+            select {
+                height: 30px;
+                margin-top: 40px;
+                outline: none;
+                border: 1px solid lightgray;
+                border-radius: 3px;
+            }
+        }
     }
 
     .order-title {
